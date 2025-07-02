@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mercado Prontera</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script src="js/jogador.js" defer></script>
+    <script src="js/inventario.js" defer></script>
+    <script src="js/loja.js" defer></script>
+    <script src="data/lojaDeItens.js" defer></script>
+    <script src="js/validacao.js" defer></script>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Mercado de Prontera</h1>
+
+        <!-- Formulário de entrada -->
+        <form id="form-jogador">
+            <input type="text" id="nome" placeholder="Digite seu nome" />
+            <button type="submit">INICIAR</button>
+        </form>
+
+
+        <!-- Dados do jogador após login -->
+        <div id="dados-jogador" class="hidden">
+            <h2>Bem-vindo, <span id="nome-jogador"></span></h2>
+            <p><strong>Nível:</strong> <span id="nivel-jogador"></span></p>
+            <p><strong>Job:</strong> <span id="job-jogador"></span></p>
+            <p><strong>Zeny:</strong> <span id="zeny-jogador"></span></p>
+
+            <div id="inventario">
+                <h3>Inventário</h3>
+                <ul id="lista-itens"></ul>
+                <button onclick="testarAdicionarItem()">Adicionar Item</button>
+                <button onclick="testarRemoverItem()">Remover 'Poção Vermelha'</button>
+            </div>
+
+            <div id="loja">
+                <h3>Loja</h3>
+                <div id="filtros-loja">
+                    <button onclick="filtrarLoja('Todos')">Todos</button>
+                    <button onclick="filtrarLoja('Consumível')">Consumíveis</button>
+                    <button onclick="filtrarLoja('Equipamento')">Equipamentos</button>
+                    <button onclick="filtrarLoja('Arma')">Armas</button>
+                </div>
+                <div id="itens-loja"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
