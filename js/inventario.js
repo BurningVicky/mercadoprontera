@@ -1,0 +1,98 @@
+function exibirInventario(jogador) {
+    const container = document.getElementById("inventario-lista");
+    if (!container) {
+        console.error("Elemento #inventario-lista não encontrado!");
+        return;
+    }
+
+    console.log("Inventário do jogador:", jogador.inventario); // Debug
+
+    container.innerHTML = "";
+
+    if (!jogador?.inventario || jogador.inventario.length === 0) {
+        container.innerHTML = `
+            <div class="empty-inventory">
+                <i class="fas fa-box-open"></i>
+                <p>Inventário vazio</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Processamento seguro dos itens
+    const itensAgrupados = jogador.inventario.reduce((acc, item) => {
+        if (!acc[item.nome]) {
+            acc[item.nome] = { ...item, qtd: 0 };
+        }
+        acc[item.nome].qtd += item.qtd;
+        return acc;
+    }, {});
+
+   // Renderização
+Object.values(itensAgrupados).forEach(item => {
+    const dadosItem = lojaDeItens.find(i => i.nome === item.nome) || {
+        nome: item.nome,
+        imagem: "img/placeholder.png",
+        preco: 0
+    };
+
+    const itemEl = document.createElement("div");
+    itemEl.className = "item-card";
+
+    // Criação programática dos elementos
+    const img = document.createElement("img");
+    img.src = dadosItem.imagem;
+    img.alt = item.nome;
+    img.onerror = () => img.src = 'img/placeholder.png';
+
+    const nome = document.createElement("h4");
+    nome.textContent = item.nome;
+
+    const quantidade = document.createElement("p");
+    quantidade.textContent = `Quantidade: ${item.qtd}`;
+
+    const btnVender = document.createElement("button");
+    btnVender.className = "btn-sell";
+    btnVender.textContent = `Vender (${Math.floor(dadosItem.preco / 2)}z)`;
+
+    // Event listener seguro
+    btnVender.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Verificação robusta da função vender
+        if (typeof window.vender === 'function') {
+            try {
+                window.vender(jogador.nome, item.nome);
+            } catch (error) {
+                console.error("Erro ao vender item:", error);
+                showNotification("Erro ao processar venda", "error");
+            }
+        } else {
+            console.error("Função vender não disponível");
+            showNotification("Sistema de vendas indisponível", "error");
+        }
+    });
+
+    // Montagem da estrutura
+    itemEl.appendChild(img);
+    itemEl.appendChild(nome);
+    itemEl.appendChild(quantidade);
+    itemEl.appendChild(btnVender);
+    
+    container.appendChild(itemEl);
+});
+}
+// Função para mostrar notificações
+function showNotification(message, type = "info") {
+    const notificationArea = document.getElementById("notification-area");
+    const notification = document.createElement("div");
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'}-circle"></i> ${message}`;
+    
+    notificationArea.appendChild(notification);
+    
+    // Remove após 3 segundos
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}

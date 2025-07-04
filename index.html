@@ -1,55 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Mercado Prontera</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <script src="js/jogador.js" defer></script>
-    <script src="js/inventario.js" defer></script>
-    <script src="js/loja.js" defer></script>
-    <script src="data/lojaDeItens.js" defer></script>
-    <script src="js/validacao.js" defer></script>
-    <script src="js/script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado de Prontera</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <base href="./">
 </head>
 <body>
-    <div class="container">
-        <h1>Mercado de Prontera</h1>
+    <div class="app-container">
+        <!-- Cabeçalho -->
+        <header class="app-header">
+            <h1><i class="fas fa-store"></i> Mercado de Prontera</h1>
+        </header>
 
         <!-- Formulário de entrada -->
         <form id="form-jogador">
-            <input type="text" id="nome" placeholder="Digite seu nome" />
+            <input type="text" id="nome" placeholder="Digite seu nome" required>
             <button type="submit">INICIAR</button>
         </form>
 
-
-        <!-- Dados do jogador após login -->
+        <!-- Área do Jogador (inicialmente oculta) -->
         <div id="dados-jogador" class="hidden">
-            <h2>Bem-vindo, <span id="nome-jogador"></span></h2>
-            <p><strong>Nível:</strong> <span id="nivel-jogador"></span></p>
-            <p><strong>Job:</strong> <span id="job-jogador"></span></p>
-            <p><strong>Zeny:</strong> <span id="zeny-jogador"></span></p>
-
-            <div id="inventario">
-                <h3>Inventário</h3>
-                <ul id="lista-itens"></ul>
-                <button onclick="testarAdicionarItem()">Adicionar Item</button>
-                <button onclick="testarRemoverItem()">Remover 'Poção Vermelha'</button>
-            </div>
-
-            <div id="loja">
-                <h3>Loja</h3>
-                <div id="filtros-loja">
-                    <button onclick="filtrarLoja('Todos')">Todos</button>
-                    <button onclick="filtrarLoja('Consumível')">Consumíveis</button>
-                    <button onclick="filtrarLoja('Equipamento')">Equipamentos</button>
-                    <button onclick="filtrarLoja('Arma')">Armas</button>
+            <div class="player-section">
+                <div class="player-card">
+                    <div class="player-avatar">
+                        <img src="img/thrift.png" alt="Avatar" id="job-avatar">
+                    </div>
+                    <div class="player-info">
+                        <h2 id="nome-jogador"></h2>
+                        <p><i class="fas fa-level-up-alt"></i> Nível: <span id="nivel-jogador"></span></p>
+                        <p><i class="fas fa-user-tag"></i> Job: <span id="job-jogador"></span></p>
+                        <p><i class="fas fa-coins"></i> <span id="zeny-jogador"></span> zeny</p>
+                    </div>
                 </div>
-                <div id="itens-loja"></div>
             </div>
+
+            <!-- Área Principal -->
+            <main class="main-content">
+                <!-- Inventário -->
+                <section class="inventory-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-backpack"></i> Inventário</h3>
+                        <span class="badge" id="item-count">0</span>
+                    </div>
+                    <ul id="lista-itens"></ul>
+                    <div id="inventario-lista" class="items-grid"></div>
+                </section>
+
+                <!-- Loja -->
+                <section class="shop-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-store-alt"></i> Loja</h3>
+                        <div class="shop-filters">
+                            <button class="filter-btn active" data-category="Todos">Todos</button>
+                            <button class="filter-btn" data-category="Consumível">Consumíveis</button>
+                            <button class="filter-btn" data-category="Equipamento">Equipamentos</button>
+                            <button class="filter-btn" data-category="Arma">Armas</button>
+                        </div>
+                    </div>
+                    <div id="itens-loja" class="items-grid"></div>
+                </section>
+            </main>
         </div>
+
+        <!-- Notificações -->
+        <div id="notification-area"></div>
     </div>
+        <script src="./data/lojaDeItens.js"></script>
+        <script src="./js/jogador.js"></script>
+        <script src="./js/validacao.js"></script>
+        <script src="./js/jogo.js"></script>
+        <script src="./js/inventario.js"></script>
+        <script src="./js/loja.js"></script>
+        <script src="./js/script.js"></script>
 </body>
 </html>
-
