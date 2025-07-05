@@ -1,7 +1,8 @@
-// loja.js
+// Funções e metodos para a loja de itens
 
 let categoriaAtual = "Todos";
 
+// Função para filtrar itens da loja por categoria
 function filtrarLoja(categoria) {
     categoriaAtual = categoria;
     exibirLoja(window.jogadorAtual); // Usa o jogador atual da memória
@@ -14,6 +15,7 @@ function exibirLoja(jogador) {
         return;
     }
 
+    // Limpa o container antes de exibir os itens
     container.innerHTML = "";
 
     const itensFiltrados = categoriaAtual === "Todos" 
@@ -24,12 +26,12 @@ function exibirLoja(jogador) {
         container.innerHTML = "<p>Nenhum item disponível nesta categoria</p>";
         return;
     }
-
+    // Filtra os itens da loja
     itensFiltrados.forEach(item => {
         const div = document.createElement("div");
         div.className = "item-card";
         
-        // Criação programática segura
+        // Criando os elementos do item
         const img = document.createElement("img");
         img.src = item.imagem;
         img.alt = item.nome;
@@ -44,11 +46,16 @@ function exibirLoja(jogador) {
         const preco = document.createElement("p");
         preco.textContent = `Preço: ${item.preco.toLocaleString()}z`;
         
+        // Botão de compra
         const btnComprar = document.createElement("button");
         btnComprar.className = "btn-buy";
         btnComprar.textContent = "Comprar";
-        btnComprar.addEventListener('click', () => comprar(jogador.nome, item.nome));
-        
+        btnComprar.addEventListener('click', () => {
+            audioManager.playSFX('click');
+            comprar(jogador.nome, item.nome);
+        });
+
+        // Montando a estrutura do item
         div.appendChild(img);
         div.appendChild(nome);
         div.appendChild(categoria);
@@ -59,6 +66,7 @@ function exibirLoja(jogador) {
     });
 }
 
+// Chamada de função para comprar um item
 function comprar(nomeJogador, nomeItem) {
     if (!window.jogadorAtual || window.jogadorAtual.nome !== nomeJogador) {
         window.jogadorAtual = carregarJogador(nomeJogador);
@@ -66,10 +74,12 @@ function comprar(nomeJogador, nomeItem) {
     
     const item = lojaDeItens.find(i => i.nome === nomeItem);
     if (!item) return false;
+
+    audioManager.playSFX('buy');
     
     return comprarItem(window.jogadorAtual, item);
 }
-
+// Chamada de função para vender um item
 function vender(nomeJogador, nomeItem) {
     if (!window.jogadorAtual || window.jogadorAtual.nome !== nomeJogador) {
         window.jogadorAtual = carregarJogador(nomeJogador);

@@ -13,12 +13,35 @@
         <!-- Cabeçalho -->
         <header class="app-header">
             <h1><i class="fas fa-store"></i> Mercado de Prontera</h1>
+            
+        <!-- Controles de Áudio -->
+        <div id="audio-controls">
+            <button id="bgm-toggle" title="Música">
+                <i class="fas fa-music"></i>
+            </button>
+            <button id="sfx-toggle" title="Efeitos Sonoros">
+                <i class="fas fa-volume-up"></i>
+            </button>
+        </div>
+
+        <!-- Controles SFX-->
+        <div id="sfx-controls">
+            <button id="play-lvlup" title="Ding!">
+                <i class="fas fa-level-up-alt"></i>
+            </button>
+            <button id="play-bless" title="Blessing!">
+                <i class="fas fa-dove"></i>
+            </button>
+            <button id="play-agiup" title="Agi Up!">
+                <i class="fas fa-bolt"></i>
+            </button>
+        </div>
         </header>
 
         <!-- Formulário de entrada -->
         <form id="form-jogador">
             <input type="text" id="nome" placeholder="Digite seu nome" required>
-            <button type="submit">INICIAR</button>
+            <button type="submit">LOGIN</button>
         </form>
 
         <!-- Área do Jogador (inicialmente oculta) -->
@@ -32,18 +55,16 @@
                         <h2 id="nome-jogador"></h2>
                         <p><i class="fas fa-level-up-alt"></i> Nível: <span id="nivel-jogador"></span></p>
                         <p><i class="fas fa-user-tag"></i> Job: <span id="job-jogador"></span></p>
-                        <p><i class="fas fa-coins"></i> <span id="zeny-jogador"></span> zeny</p>
+                        <p><i class="fas fa-coins"></i>Zeny: <span id="zeny-jogador"></span> z</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Área Principal -->
-            <main class="main-content">
+        
                 <!-- Inventário -->
                 <section class="inventory-section">
                     <div class="section-header">
-                        <h3><i class="fas fa-backpack"></i> Inventário</h3>
-                        <span class="badge" id="item-count">0</span>
+                        <h3><i class="fas fa-box"></i> Inventário</h3>
                     </div>
                     <ul id="lista-itens"></ul>
                     <div id="inventario-lista" class="items-grid"></div>
@@ -56,18 +77,42 @@
                         <div class="shop-filters">
                             <button class="filter-btn active" data-category="Todos">Todos</button>
                             <button class="filter-btn" data-category="Consumível">Consumíveis</button>
-                            <button class="filter-btn" data-category="Equipamento">Equipamentos</button>
                             <button class="filter-btn" data-category="Arma">Armas</button>
+                            <button class="filter-btn" data-category="Equipamento">Equipamentos</button>
+                            <button class="filter-btn" data-category="Acessório">Acessórios</button>
                         </div>
                     </div>
                     <div id="itens-loja" class="items-grid"></div>
                 </section>
-            </main>
+            
         </div>
 
         <!-- Notificações -->
         <div id="notification-area"></div>
+        
+        <!-- Elementos de Áudio (hidden) -->
+        <audio id="bgm" loop>
+        <source src="audio/bgm/prontera-theme.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="sfx-login">
+        <source src="audio/sfx/login.wav" type="audio/wav">
+        </audio>
+        <audio id="sfx-notification">
+        <source src="audio/sfx/notification.wav" type="audio/wav">
+        </audio>
+        <audio id="sfx-lvlup">
+        <source src="audio/sfx/lvlup.wav" type="audio/wav">
+        </audio>
+        <audio id="sfx-bless">
+        <source src="audio/sfx/bless.wav" type="audio/wav">
+        </audio>
+        <audio id="sfx-agiup">
+        <source src="audio/sfx/agiup.wav" type="audio/wav">
+        </audio>
+
     </div>
+        <!-- Scripts ordem correta, não mexer -->
+        <script src="js/audioManager.js"></script>
         <script src="./data/lojaDeItens.js"></script>
         <script src="./js/jogador.js"></script>
         <script src="./js/validacao.js"></script>

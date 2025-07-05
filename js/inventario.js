@@ -1,14 +1,17 @@
+// Funções e métodos para exibir, filtrar e gerenciar o inventário do jogador
+
 function exibirInventario(jogador) {
     const container = document.getElementById("inventario-lista");
     if (!container) {
-        console.error("Elemento #inventario-lista não encontrado!");
+        console.error("#inventario-lista não encontrado!");
         return;
     }
 
     console.log("Inventário do jogador:", jogador.inventario); // Debug
 
-    container.innerHTML = "";
+    container.innerHTML = ""; // Limpa o container antes de exibir os itens
 
+    // Verifica se o jogador tem inventário vazio e dá um retorno
     if (!jogador?.inventario || jogador.inventario.length === 0) {
         container.innerHTML = `
             <div class="empty-inventory">
@@ -19,7 +22,7 @@ function exibirInventario(jogador) {
         return;
     }
 
-    // Processamento seguro dos itens
+    // Processamento dos itens
     const itensAgrupados = jogador.inventario.reduce((acc, item) => {
         if (!acc[item.nome]) {
             acc[item.nome] = { ...item, qtd: 0 };
@@ -28,7 +31,7 @@ function exibirInventario(jogador) {
         return acc;
     }, {});
 
-   // Renderização
+// Renderização inventário
 Object.values(itensAgrupados).forEach(item => {
     const dadosItem = lojaDeItens.find(i => i.nome === item.nome) || {
         nome: item.nome,
@@ -39,7 +42,7 @@ Object.values(itensAgrupados).forEach(item => {
     const itemEl = document.createElement("div");
     itemEl.className = "item-card";
 
-    // Criação programática dos elementos
+    // Criação dos elementos
     const img = document.createElement("img");
     img.src = dadosItem.imagem;
     img.alt = item.nome;
@@ -58,8 +61,10 @@ Object.values(itensAgrupados).forEach(item => {
     // Event listener seguro
     btnVender.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        // Verificação robusta da função vender
+
+         audioManager.playSFX('click');
+
+        // Verifica função vender
         if (typeof window.vender === 'function') {
             try {
                 window.vender(jogador.nome, item.nome);
@@ -73,7 +78,7 @@ Object.values(itensAgrupados).forEach(item => {
         }
     });
 
-    // Montagem da estrutura
+    // Montando a estrutura
     itemEl.appendChild(img);
     itemEl.appendChild(nome);
     itemEl.appendChild(quantidade);
@@ -82,8 +87,10 @@ Object.values(itensAgrupados).forEach(item => {
     container.appendChild(itemEl);
 });
 }
-// Função para mostrar notificações
+
+// Função para mostrar notificações do sistema na tela
 function showNotification(message, type = "info") {
+    audioManager.playSFX('notification');
     const notificationArea = document.getElementById("notification-area");
     const notification = document.createElement("div");
     notification.className = `notification ${type}`;
