@@ -65,6 +65,7 @@ function carregarJogador(nome) {
             jogador.job = obj.job || 'Noviço';
             jogador.zeny = obj.zeny || 0;
             jogador.inventario = obj.inventario || [];
+            jogador.jobImage = obj.jobImage || 'novico'; // Define uma imagem padrão se não existir
             
             console.log('Jogador carregado:', jogador);
             return jogador;

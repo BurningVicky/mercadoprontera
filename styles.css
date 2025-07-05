@@ -633,6 +633,25 @@ button:focus {
     .player-stats {
         grid-template-columns: 1fr;
     }
+    
+    #audio-controls, #sfx-controls {
+        bottom: 5px;
+        gap: 5px;
+    }
+    
+    #audio-controls {
+        left: 5px;
+    }
+    
+    #sfx-controls {
+        right: 5px;
+    }
+    
+    #audio-controls button, #sfx-controls button {
+        width: 36px;
+        height: 36px;
+        font-size: 0.8rem;
+    }
 }
 
 /* ==================== SEM ITENS NO INVENTÁRIO ==================== */
