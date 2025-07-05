@@ -6,9 +6,9 @@
     <title>Mercado de Prontera</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preload" href="img/prontera1-bg.png" as="image">
-    <link rel="preload" href="img/prontera2-bg.png" as="image">
-    <link rel="preload" href="img/prontera3-bg.png" as="image">
+    <link rel="preload" href="img/prontera1-bg.png" as="image" loading="lazy">
+    <link rel="preload" href="img/prontera2-bg.png" as="image" loading="lazy">
+    <link rel="preload" href="img/prontera3-bg.png" as="image" loading="lazy">
     <link rel="icon" type="image/png" href="favicon.png">
     <base href="./">
 </head>
@@ -69,7 +69,6 @@
                 </div>
             </div>
 
-        
                 <!-- Inventário -->
                 <section class="inventory-section">
                     <div class="section-header">
@@ -126,6 +125,7 @@
         </div>
 
         <!-- Scripts ordem correta, não mexer -->
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
         <script src="js/audioManager.js"></script>
         <script src="./data/lojaDeItens.js"></script>
         <script src="./js/jogador.js"></script>

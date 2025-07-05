@@ -7,8 +7,6 @@ function exibirInventario(jogador) {
         return;
     }
 
-    console.log("Inventário do jogador:", jogador.inventario); // Debug
-
     container.innerHTML = ""; // Limpa o container antes de exibir os itens
 
     // Verifica se o jogador tem inventário vazio e dá um retorno
@@ -86,20 +84,15 @@ Object.values(itensAgrupados).forEach(item => {
     
     container.appendChild(itemEl);
 });
-}
 
-// Função para mostrar notificações do sistema na tela
-function showNotification(message, type = "info") {
-    audioManager.playSFX('notification');
-    const notificationArea = document.getElementById("notification-area");
-    const notification = document.createElement("div");
-    notification.className = `notification ${type}`;
-    notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'}-circle"></i> ${message}`;
-    
-    notificationArea.appendChild(notification);
-    
-    // Remove após 3 segundos
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
+// Inicializa SortableJS
+new Sortable(container, {
+    animation: 150,
+    ghostClass: "sortable-ghost",
+    chosenClass: "sortable-chosen",
+    onEnd: function(evt) {
+    console.log('Item movido', evt.oldIndex, '->', evt.newIndex);
+    }
+    });
+
 }

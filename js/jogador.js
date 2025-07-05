@@ -8,7 +8,7 @@ class Jogador {
         this.zeny = Math.floor(Math.random() * (2000000 - 50000 + 1)) + 50000; // Sorteia zeny(dinheiro) entre 50.000 e 2.000.000
         this.inventario = []; // array para armazenar os itens do inventário
     }
-    // Metodo para sortear o job(Classe) do jogador
+    // Metodo para sortear o Job(Classe) do jogador
     sortearJob() {
         const jobs = {
             "Espadachim": "espadachim",

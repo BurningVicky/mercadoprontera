@@ -39,12 +39,6 @@ class AudioManager {
       this.savePreferences();
     });
     
-    // Iniciar música quando o usuário interagir (requisito dos navegadores)
-    document.body.addEventListener('click', () => {
-      if (this.bgm.paused && this.bgmEnabled) {
-        this.bgm.play().catch(e => console.log("Autoplay prevented:", e));
-      }
-    }, { once: true });
   }
   
   // Atualiza o estado do BGM

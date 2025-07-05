@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!jogador) {
             jogador = new Jogador(nome);
             salvarJogador(jogador);
+            showNotification(`Bem-vindo, ${nome}! Seu personagem foi criado.`, 'success');
+        } else {
+            showNotification(`Bem-vindo de volta, ${nome}!`, 'info');
         }
 
         window.jogadorAtual = jogador;
@@ -98,18 +101,24 @@ function exibirDados(jogador) {
     });
 }
 
-// Função para chamada de notificações em tela junto com timeout
-function mostrarNotificacao(mensagem, tipo) {
-    const notificationArea = document.getElementById('notification-area');
-    const notification = document.createElement('div');
-    notification.className = `notification ${tipo}`;
-    notification.textContent = mensagem;
+// Função para mostrar notificações do sistema na tela
+function showNotification(message, type = "info") {
+    audioManager.playSFX('notification');
+    const notificationArea = document.getElementById("notification-area");
+    const notification = document.createElement("div");
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'}-circle"></i> ${message}`;
+    
     notificationArea.appendChild(notification);
     
+    // Remove após 3 segundos
     setTimeout(() => {
         notification.remove();
     }, 3000);
 }
+
+// Expor a função de notificação globalmente
+window.mostrarNotificacao = showNotification;
 
 // Slide Show para a página inicial
 const slides = document.querySelectorAll('.slide');
@@ -122,3 +131,5 @@ function nextSlide() {
 }
 
 setInterval(nextSlide, 10000);
+
+
