@@ -6,6 +6,9 @@
     <title>Mercado de Prontera</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="img/prontera1-bg.png" as="image">
+    <link rel="preload" href="img/prontera2-bg.png" as="image">
+    <link rel="preload" href="img/prontera3-bg.png" as="image">
     <base href="./">
 </head>
 <body>
@@ -49,7 +52,7 @@
             <div class="player-section">
                 <div class="player-card">
                     <div class="player-avatar">
-                        <img src="img/thrift.png" alt="Avatar" id="job-avatar">
+                        <img src="img/placeholder.png" alt="Avatar" id="job-avatar">
                     </div>
                     <div class="player-info">
                         <h2 id="nome-jogador"></h2>
@@ -111,6 +114,14 @@
         </audio>
 
     </div>
+
+        <!-- Slideshow de fundo -->
+        <div class="background-slideshow">
+            <div class="slide active" style="background-image: url('./img/prontera1-bg.png')"></div>
+            <div class="slide" style="background-image: url('./img/prontera2-bg.png')"></div>
+            <div class="slide" style="background-image: url('./img/prontera3-bg.png')"></div>
+        </div>
+
         <!-- Scripts ordem correta, não mexer -->
         <script src="js/audioManager.js"></script>
         <script src="./data/lojaDeItens.js"></script>
