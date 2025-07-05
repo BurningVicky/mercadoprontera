@@ -196,7 +196,9 @@ body {
     font-size: 1.8rem;
     text-shadow: 0 2px 4px rgb(0, 0, 0);
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .player-info h2::after {
@@ -207,6 +209,7 @@ body {
     width: 50px;
     height: 2px;
     background: var(--secondary);
+    
 }
 
 .player-info p {
@@ -218,6 +221,7 @@ body {
     padding: 8px 12px;
     border-radius: 6px;
     transition: all 0.2s ease;
+    color: #FFFFFF;
 }
 
 .player-info p:hover {
